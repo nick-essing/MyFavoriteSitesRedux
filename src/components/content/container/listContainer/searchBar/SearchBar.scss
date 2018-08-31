@@ -1,0 +1,26 @@
+.Suche--accordion{
+    position: absolute;
+    top: 4px;
+    right: 9px;
+    width: 40%;
+    float: right;
+    font-size: 14px!important; 
+} 
+#search{
+    width: 100%;
+    background-color: transparent;
+    border-width: 0 0 1px;
+    border-color: #b8c6e3;
+    padding: 4px 8px;
+    border-radius: 0!important;
+}
+#iconlabel{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 28px;
+    opacity: .6;
+    display: flex;
+    align-items: center;
+}  
