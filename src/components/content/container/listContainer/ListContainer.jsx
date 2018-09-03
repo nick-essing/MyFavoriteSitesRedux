@@ -37,7 +37,7 @@ class ListContainer extends React.Component {
         );
     }
     appendList = () => {
-        this.props.fetchData("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=" + this.props.searchString + "&Skip="+ this.props.list.length +"&Take="+ count)
+        this.props.fetchData(this.props.searchString, this.props.list.length, count)
     } 
 }
 
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (link) => dispatch(fetchData(link)),
+        fetchData: (serarchString, skip, take) => dispatch(fetchData(serarchString, skip, take)),
         search: (value) => dispatch(search(value)),
         emptyList: () => dispatch(emptyList())
     }

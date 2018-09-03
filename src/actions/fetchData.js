@@ -8,9 +8,9 @@ export const concatData = data => ({
 export const SET_NULL= 'SET_NULL';
 export const setNull = () => ({ type: SET_NULL });
 
-export const fetchData = (link) => dispatch => {
+export const fetchData = (searchString, skip, take) => dispatch => {
     chayns.showWaitCursor();
-    fetch(link)
+    fetch("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=" + searchString + "&Skip="+ skip +"&Take="+ take)
         .then(res => res.json())
         .then(           
             data => {
