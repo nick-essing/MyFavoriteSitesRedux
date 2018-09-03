@@ -20,7 +20,7 @@ class ListItem extends React.Component {
                         <i className='fa fa-chevron-right'></i>
                     </div>
                     <div className='ListItem__Image'>
-                        <img style={{backgroundImage: `url( https://sub60.tobit.com/l/${this.props.locationId})` }} />
+                        <img style={{backgroundImage: `url( https://sub60.tobit.com/l/${this.props.locationId})`, backgroundSize: 40 + 'px ' + 40 + 'px' }} />
                     </div>
                     <div className='ListItem__Title'>
                         <p className='ListItem__Title--headline'>{this.props.appstoreName}</p>

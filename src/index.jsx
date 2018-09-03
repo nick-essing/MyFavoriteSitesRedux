@@ -5,8 +5,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import immutable from 'immutable';
 import App from './components/App';
-import rootReducer from './reducers/index';
-import { fetchData } from './actions/fetchData';
+import rootReducer from './reducers/indexReducer';
 
 async function init() {
 
@@ -20,8 +19,6 @@ async function init() {
     if (__DEV__ || __STAGING__) {
         storeMiddleware.push(require('redux-logger').default);
     }
-
-    console.log(storeMiddleware);
 
     const store = createStore(
         rootReducer,
@@ -39,8 +36,6 @@ async function init() {
     } catch (err) {
         console.warn('no chayns environment found');
     }
-
-    store.dispatch(fetchData("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=love&Skip=0&Take=10"));
 }
 
 init();
