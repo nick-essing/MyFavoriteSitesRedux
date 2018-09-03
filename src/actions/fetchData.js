@@ -1,17 +1,21 @@
-import { fromJS } from 'immutable';
 
-export const SAVE_SERVER_DATA = 'SAVE_SERVER_DATA';
-export const saveServerData = data => ({
-    type: SAVE_SERVER_DATA,
+export const CONCAT_DATA = 'CONCAT_DATA';
+export const concatData = data => ({
+    type: CONCAT_DATA,
     data
 });
 
-/**
- * Example for an async actions, requires redux thunk middleware
- * //redux.js.org/docs/advanced/AsyncActions
- */
-export const loadData = () => (dispatch) => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
+export const fetchData = (link) => dispatch => {
+    chayns.showWaitCursor();
+    fetch(link)
         .then(res => res.json())
-        .then(data => dispatch(saveServerData(fromJS(data))));
+        .then(           
+            data => {
+                if (data !== null){
+                    dispatch(concatData(data.Data))
+                }
+            }
+        )
+        .finally(() => chayns.hideWaitCursor());
 };
+

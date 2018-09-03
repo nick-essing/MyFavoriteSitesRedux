@@ -1,5 +1,6 @@
 import React from 'react';
-import { HEADLINE, DESCRIPTION } from '../../constants/text';
+
+import { HEADLINE, DESCRIPTION, LINK } from '../../constants/text';
 
 const Intro = () => (
     <div className="tapp__intro">
@@ -7,7 +8,7 @@ const Intro = () => (
             {HEADLINE}
         </h1>
         <p>
-            {DESCRIPTION}
+            {DESCRIPTION}<a>{LINK}</a>
         </p>
     </div>
 );
