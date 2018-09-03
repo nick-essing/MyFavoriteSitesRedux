@@ -17,16 +17,27 @@ class ListContainer extends React.Component {
 
     render() {
         return (
-            <Accordion head="MyFavoriteSites" defaultOpened className="accordion--fixed" right={<SearchBar callback={(value) => {this.props.search(value);this.props.emptyList();this.appendList()}}/>}>
+            <Accordion
+                head="MyFavoriteSites"
+                defaultOpened
+                className="accordion--fixed"
+                right={
+                    <SearchBar
+                        callback={(value) => {
+                            this.props.search(value);
+                            this.props.emptyList();
+                            this.appendList()
+                            }}
+                    />
+                }
+            >
                 <CreateList list={this.props.list}/>
                 <MoreBtn callback={() => this.appendList()}/>
             </Accordion>
         );
     }
     appendList = () => {
-        if(this.props.list !== null){
-           this.props.fetchData("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=" + this.props.searchString + "&Skip="+ this.props.list.length +"&Take="+ count)
-        }
+        this.props.fetchData("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=" + this.props.searchString + "&Skip="+ this.props.list.length +"&Take="+ count)
     } 
 }
 
