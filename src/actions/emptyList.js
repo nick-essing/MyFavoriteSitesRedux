@@ -3,4 +3,4 @@ export const empty = () => ({
     type: EMPTY
 });
 
-export const emptyList = () => dispatch => { dispatch(empty()) };
+export const emptyList = () => (dispatch) => { dispatch(empty()); };

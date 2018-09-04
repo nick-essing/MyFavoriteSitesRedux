@@ -4,4 +4,4 @@ export const searchString = data => ({
     data
 });
 
-export const search = (value) => dispatch => {dispatch(searchString(value))};
+export const search = value => (dispatch) => { dispatch(searchString(value)); };

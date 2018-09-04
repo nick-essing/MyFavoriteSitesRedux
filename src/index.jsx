@@ -8,7 +8,7 @@ import App from './components/App';
 import rootReducer from './reducers/indexReducer';
 
 async function init() {
-
+    
     if (__DEV__ || __STAGING__) {
         const installDevTools = require('immutable-devtools');
         installDevTools(immutable);
@@ -28,10 +28,12 @@ async function init() {
         await chayns.ready;
 
         const tappElement = document.querySelector('.tapp');
+        // TODO: ESLINT!!!!!
         ReactDOM.render(
             <Provider store={store}>
                 <App/>
-            </Provider>, tappElement
+            </Provider>,
+            tappElement
         );
     } catch (err) {
         console.warn('no chayns environment found');
