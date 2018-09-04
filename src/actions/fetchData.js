@@ -5,23 +5,31 @@ export const concatData = data => ({
     data
 });
 
-export const SET_NULL= 'SET_NULL';
+export const NEW_LIST = 'NEW_LIST';
+export const newList = data => ({
+    type: NEW_LIST,
+    data
+});
+
+
+export const SET_NULL = 'SET_NULL';
 export const setNull = () => ({ type: SET_NULL });
 
-export const fetchData = (searchString, skip, take) => dispatch => {
+export const fetchData = (searchString, skip, take) => (dispatch) => {
     chayns.showWaitCursor();
-    fetch("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=" + searchString + "&Skip="+ skip +"&Take="+ take)
+    fetch(`https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=${searchString}&Skip=${skip}&Take=${take}`)
         .then(res => res.json())
-        .then(           
-            data => {
-                console.log('data', data);
-                if (data.Data !== null){
-                    dispatch(concatData(data.Data))
-                }else{
-                    dispatch(setNull())
+        .then((data) => {
+                if (data.Data !== null) {
+                    if (skip === 0) {
+                        dispatch(newList(data.Data));
+                    } else {
+                        dispatch(concatData(data.Data));
+                    }
+                } else {
+                    dispatch(setNull());
                 }
-            }
-        )
+            })
         .finally(() => chayns.hideWaitCursor());
 };
 
