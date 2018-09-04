@@ -6,18 +6,29 @@ import SearchBar from './searchBar/SearchBar';
 import CreateList from './createList/CreateList';
 import { fetchData } from '../../../../actions/fetchData';
 import { search } from '../../../../actions/search';
-import { emptyList } from '../../../../actions/emptyList';
 
 const count = 10;
 class ListContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.appendList('constructor');
+        this.state = {
+            allowMoreBtn: true,
+            listLength: this.props.list.length
+        }
+        this.appendList(this.props.list.length);
     }
 
-    appendList(text) {
-        console.log('aufruf von ', text, this.props.searchString, this.props.list.length, count)
-        this.props.fetchData(this.props.searchString, this.props.list.length, count);
+    componentWillReceiveProps (props) {
+        if (props.list.length !== this.state.listLength) {
+            this.setState({
+                allowMoreBtn: true,
+                listLength: props.list.length
+            });
+        }
+    }
+
+    appendList(skip) {
+        this.props.fetchData(this.props.searchString, skip, count);
     }
 
     render() {
@@ -30,14 +41,19 @@ class ListContainer extends React.Component {
                     <SearchBar
                         callback={(value) => {
                             this.props.search(value);
-                            this.props.emptyList();
-                            this.appendList('searchbar callback');
+                            this.appendList(0);
                         }}
                     />
                 }
             >
                 <CreateList list={this.props.list}/>
-                <MoreBtn callback={() => this.appendList('morebtn')}/>
+                <MoreBtn callback={() => {
+                    if (this.state.allowMoreBtn) {
+                        this.appendList(this.props.list.length);
+                        this.setState({ allowMoreBtn: false });
+                    }
+                    }}
+                />
             </Accordion>
         );
     }
@@ -54,7 +70,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (serarchString, skip, take) => dispatch(fetchData(serarchString, skip, take)),
         search: value => dispatch(search(value)),
-        emptyList: () => dispatch(emptyList())
     };
 };
 

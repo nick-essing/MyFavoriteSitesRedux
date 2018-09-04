@@ -5,6 +5,13 @@ export const concatData = data => ({
     data
 });
 
+export const NEW_LIST = 'NEW_LIST';
+export const newList = data => ({
+    type: NEW_LIST,
+    data
+});
+
+
 export const SET_NULL = 'SET_NULL';
 export const setNull = () => ({ type: SET_NULL });
 
@@ -14,7 +21,11 @@ export const fetchData = (searchString, skip, take) => (dispatch) => {
         .then(res => res.json())
         .then((data) => {
                 if (data.Data !== null) {
-                    dispatch(concatData(data.Data));
+                    if (skip === 0) {
+                        dispatch(newList(data.Data));
+                    } else {
+                        dispatch(concatData(data.Data));
+                    }
                 } else {
                     dispatch(setNull());
                 }
