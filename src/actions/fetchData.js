@@ -14,7 +14,6 @@ export const fetchData = (searchString, skip, take) => dispatch => {
         .then(res => res.json())
         .then(           
             data => {
-                console.log('data', data);
                 if (data.Data !== null){
                     dispatch(concatData(data.Data))
                 }else{

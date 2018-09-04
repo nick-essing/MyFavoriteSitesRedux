@@ -15,15 +15,9 @@ class CreateList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('CreateList state', state);
     return {
         list: state.listReducer.list,
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchData: (link) => dispatch(fetchData(link))
-    }
-}
 
-export default connect( mapStateToProps, mapDispatchToProps)(CreateList);
+export default connect( mapStateToProps)(CreateList);
